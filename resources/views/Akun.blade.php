@@ -26,12 +26,15 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <select name="cars" id="cars" placeholder="Kategori Akun">
-                    <option value="s">Pilih Kategori Akun</option>
-                    <option value="">----</option>
-                    <option value="">----</option>
-                    <option value="">----</option>
+                <select name="cars" id="KatAkun" onchange="gunakan()" placeholder="Kategori Akun">
+                    <option value="">Pilih Kategori Akun</option>
+                    <option value="1">ASET</option>
+                    <option value="2">KEWAJIBAN</option>
+                    <option value="3">MODAL</option>
+                    <option value="4">PENDAPATAN</option>
+                    <option value="5">BEBAN</option>
                 </select>
+                <input type="text" name="" id="indukakun">
                 <input type="text" name="" id=""placeholder="No Akun">
                 <input type="text" name="" id=""placeholder="Nama Akun">
             </div>
@@ -46,8 +49,16 @@
   </div>
 </body>
 <script>
+    $(document).ready(function(){
+        
+    })
     function tambah() {
         $("#exampleModal").modal('show');
+    }
+    function gunakan(){
+        var katakun = document.getElementById("KatAkun");
+        var value = katakun.options[katakun.selectedIndex].value;
+        document.getElementById("indukakun").value = value;
     }
 </script>
 </html>

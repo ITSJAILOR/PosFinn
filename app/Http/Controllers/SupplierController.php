@@ -3,49 +3,30 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\PersediaanModel;
 use Illuminate\Support\Facades\DB;
 
-class PersediaanController extends Controller
+class SupplierController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        //
-    }
     public function read()
     {
-        // $data = PersediaanModel::all();
-        // return view('persediaanread')->with(['data' => $data]);
-        $data = DB::table('barang')
-                            ->select('*' , DB::raw('SUM(jumlah) AS totalStok'))
-                            ->groupBy('kd_barang')
-                            ->get();
-        return view('persediaanread')->with(['data' => $data]);
+        //
+    	$supplier = DB::table('supplier')->get();
+    	return view('supplierread')->with(['data' => $supplier]);
+    	return view('Supplier')->with(['data' => $supplier]);
     }
 
     public function search(Request $request)
     {
         $cari = $request->CariData;
-        $data = DB::table('barang')
-                            ->select('*' , DB::raw('SUM(jumlah) AS totalStok'))
-                            ->groupBy('kd_barang')
-                            ->where('kd_barang','like','%'.$cari.'%')->paginate();
 
-        return view('persediaanread')->with(['data' => $data]);
-    }
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        $supplier = DB::table('supplier')->where('nm_supplier','like','%'.$cari.'%')->paginate();
+
+        return view('supplierread')->with(['data' => $supplier]);
     }
 
     /**
@@ -55,8 +36,12 @@ class PersediaanController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        //
+    {         
+        $data['kd_supplier'] = $request->KdSupplier;
+        $data['nm_supplier'] = $request->NmSupplier;
+        $data['alamat'] = $request->AlSupplier;
+        DB::table('supplier')->insert($data);
+
     }
 
     /**
@@ -67,7 +52,8 @@ class PersediaanController extends Controller
      */
     public function show($id)
     {
-        // 
+    	$supplier = DB::table('supplier')->where('id', $id)->get();
+    	return view('supplierrincian')->with(['data' => $supplier]);
     }
 
     /**
@@ -77,8 +63,10 @@ class PersediaanController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {
-        //
+    {        
+        $supplier = DB::table('supplier')->where('id', $id)->get();
+    	/*$supplier = DB::table('supplier')->where('kd',$id);*/
+    	return view('Supplier')->with(['data' => $supplier]);
     }
 
     /**
@@ -101,6 +89,6 @@ class PersediaanController extends Controller
      */
     public function destroy($id)
     {
-        //
+        DB::table('supplier')->where('id',$id)->delete();
     }
 }

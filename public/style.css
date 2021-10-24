@@ -1,121 +1,153 @@
 body {
-    font-family: "Lato", sans-serif;
-    background-color: #FDF0EC;
-    height: 100%;
-    margin: 0;
-  }
-  .sideheading {
-    background-color: #ffff;
-    position: fixed;
-    margin: -100px 0px 0px 0px;
-    width: 50%;
-    height: 100%;
-    text-align: center;
-  }
+  font-family: "FakeReceipt";/*sans-serif;*/
+  src: url('fakereceipt.ttf');
+  background-color: #ffff;
+  height: 100%;
+}
 
-  .sidenav {
-    height: 100%;
-    position: fixed;
-    z-index: 1;
-    top: 0;
-    background-color: #ffff;
-    overflow-x: hidden;
-    transition: 0.5s;
-    width: 250px;
-    padding-top: 60px;
-    margin: 1px;
-  }
-  .right{
-    right: 0;
-    width: 300px;
-  }
-  
-  .sidenav a {
-    padding: 8px 8px 8px 32px;
-    text-decoration: none;
-    font-size: 25px;
-    color: #818181;
-    display: block;
-    transition: 0.3s;
-  }
-  
-  .sidenav a:hover {
-    color: #f1f1f1;
-  }
-  
-  .sidenav .closebtn {
-    position: absolute;
-    top: 0;
-    right: 25px;
-    font-size: 36px;
-    margin-left: 60px;
-  }
-  
-  .konten {
-    transition: margin-left .5s;
-    transition: margin-right .5s;
-    padding: 16px;
-  }
-  .transaksi{
-    margin:0px 300px 0px 250px;
-  }
-  .login{
-    position: relative;
-    margin:100px 100px 0px 800px;
-    background-color: #ffff;
-    padding: 16px;
-  }
-  .BBesar{
-    margin:0px 0px 0px 250px;
-    padding: 10px 20px;
-  }
-  .hero-image{
-      /* The image used */
-      background-image: url("Banner.jpg");
-      min-width: 100%;
-      min-height: 100%;
-      background-size: cover;
-      position: relative;
-    }
+.hero-image{
+  /* The image used */
+  background-image: url('Banner.jpg');
+  min-width: 100%;
+  min-height: 100%; 
+  background-size: cover;
+  position: relative;
+}
+.sideheading {
+  background-color: #ffff;
+  position: fixed;
+  margin: -100px 0px 0px 0px;
+  width: 50%;
+  height: 100%;
+  text-align: center;
+}
+
+.sidenav {
+  height: 100%;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  background-color: #6F73D2;
+  overflow-x: hidden;
+  transition: 0.5s;
+  width: 20%;
+  padding-top: 60px;
+  margin: 1px;
+  display: block;
+}
+
+.sidenav a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+
+.sidenav a:hover {
+  color: #f1f1f1;
+}
+
+.closebtn {
+  position: absolute;
+  top: 0;
+  color: #ffff;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 60px;
+}
+
+.main{
+  margin-left: 20%;
+  padding: 10px;
+}
+
+.konten{  
+  height: 100%;
+  position: fixed;
+  z-index: 1;
+  width: 55%;
+  border-radius: 24px;
+  background-color: #F4F5F6;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding: 10px;
+  display: block;
+}
+.login{
+  position: relative;
+  margin:100px 100px 0px 800px;
+  background-color: #ffff;
+  padding: 16px;
+}
+.BBesar{
+  position: fixed;
+  background-color: #ffff;
+  border-radius: 24px;
+  margin:10px 300px ;
+  padding: 10px 20px;
+  min-height: 600px;
+  min-width: 1000px;
+}
+
+.HalfSide {
+  height: 100%;
+  position: fixed;
+  z-index: 1;
+  right: 10px;
+  border-radius: 24px;
+  background-color: #F4F5F6;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding: 10px;
+  margin: 1px;
+  display: block;
+}
+
+.OrderSide{
+  width: 20%;
+}
+.Half{
+  width: 37%;
+}
+
+.HalfLook{
+  width: 37%;
+}
 
 button {
-    border: none;
-    border-radius: 25px;
-    background-color: #6F73D2;
-    margin: 5px 20px 5px 15px;
-    padding: 14px 28px;
-    font-size: 16px;
-    text-align: center;
-    color: #ffff;
+  border: none;
+  border-radius: 25px;
+  background-color: #83C9F4;
+  padding: 14px 28px;
+  font-size: 16px;
+  text-align: center;
+  color: #ffff;
 }
-button:hover{background-color:#83C9F4;}
-button:focus{background-color:#A3D5FF;}
+/* button:hover{background-color:#83C9F4;} */
+.active{
+background-color:#ffff; color: #6F73D2;
+}
+button:hover{background-color:#ffff; color: #6F73D2;}
+/* button:focus{background-color:#A3D5FF;} */
+.current{
+  background-color:#ffff; color: #6F73D2;
+  }
 
 .NavButton {
-  display: block;
-  width: 100%;
-  border: none;
-  border-radius: 0;
-  background-color: #ffff;
-  padding: 14px 28px;
-  font-size: 16px;
-  text-align: left;
-  color: #6F73D2;
+display: block;
+width: 120%;
+border: none;
+border-radius: 24px;
+background-color: #6F73D2;
+padding: 14px 28px;
+font-size: 16px;
+text-align: left;
+color: #ffff;
 }
-.NavButton:focus{background-color:#83C9F4;}
 
-.MenuButton {
-  width: 40%;
-  height: 200px;
-  border: none;
-  border-radius: 20px;
-  background-color: #ffff;
-  padding: 14px 28px;
-  font-size: 16px;
-  text-align: left;
-  color: #6F73D2;
-}
-.MenuButton:focus{background-color:#83C9F4;}
+.NavButton:active{background-color:#83C9F4;}
 
 input, select, textarea {
   width: auto;
@@ -124,62 +156,75 @@ input, select, textarea {
   border: 1px solid #6F73D2;
   border-radius: 24px;
   resize: vertical;
-}
+  }
 
 table {
-  border-collapse: collapse;
-  width: 100%;
+border-collapse: collapse;
+width: auto;
 }
 
 th, td {
-  padding: 8px;
-  text-align: left;
-  border-bottom: 1px solid #6F73D2;
+padding: 8px;
+text-align: left;
+border-bottom: 1px solid #6F73D2;
 }
 
-@media screen and (max-width: 1100px) {
-  .sideheading {
-    background-color: #ffff;
-    position: relative;
-    margin: 0px;
-    width: 100%;
-    height: 100%;
-    text-align: center;
+@media screen and (max-width: 1000px) {
+  .main{
+    margin : 0px;
+    padding: 0px;
   }
-  .hero-image{
-    height: 300px;
-  }
-  .sidenav{
-    padding-top: 36px;
-    width: 0px;
-  }
-  .sidenav a {font-size: 18px;}
-  .konten { 
-    margin: 0px;     
-  } 
-  .login {
-    position: relative;
-    margin: 50px 0px 0px 0px;
-    background-color: #ffff;
-    padding: 16px;
-  }
-  .BBesar { 
-    margin: 0px;     
-  }
-  .MenuButton {
-    display: block;
-    width: 90%;
-    height: auto;}
+
+.sideheading {
+  background-color: #ffff;
+  position: relative;
+  margin: 0px;
+  width: 100%;
+  height: 100%;
+  text-align: center;
 }
+.hero-image{
+  height: 300px;
+}
+.sidenav{
+  padding-top: 36px;
+  width: 0px;
+}
+
+.HalfSide{
+  padding-top: 36px;
+  width: 0%;
+}
+
+.sidenav a {font-size: 18px;}
+
+.konten {        
+  width: 95%;
+}
+ 
+.login {
+  position: relative;
+  margin: 50px 0px 0px 0px;
+  background-color: #ffff;
+  padding: 16px;
+}
+.BBesar { 
+  margin: 0px;     
+}
+}
+
 @media screen and (min-width: 1100px){
-  
+
   .konten .sidebutton, .Orderbutton{
     display: none;
   }
   .sidenav .closebtn {
     display: none;
   }
+  .HalfSide .closebtn {
+    display: none;
+  }
   .BBesar .sidebutton{
     display: none;
   }
-}
+  }

@@ -10,10 +10,20 @@
   <!--Script animation side bar-->
   <script src="SideScript.js"></script></head>
   <body>
-  <div id="mySidenav" class="sidenav" style="left: 0;"></div>
   
-  <div class="BBesar">
+  <div class="main">
+    <div class="konten HalfLook">
     <span class="sidebutton" style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
+    <button class="Orderbutton" style="bottom: 5px; position: fixed; width: 100%; left: 0;" onclick="openChart()">Order</button>
+    </div>
+    
+    <div id="mySidenav" class="sidenav" style="left: 0;"></div>  
+
+    <div id="mySidenav2" class="HalfSide Half" >        
+      <a href="javascript:void(0)" class="closebtn" style="color: #6F73D2 !important;" onclick="closeNav()">&times;</a>
+      
+      </div>
+
   </div>
 </body>
 </html>
