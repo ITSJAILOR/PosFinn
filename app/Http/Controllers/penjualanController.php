@@ -46,7 +46,22 @@ class penjualanController extends Controller
         $data['stok'] = $request->Jumlah;
         $data['harga_jual'] = $request->HargaJual;
         $data['total'] = $request->Total;
-        DB::table('penjualan')->insert($data);
+        // DB::table('penjualan')->insert($data);
+        
+        // $cari = $request->KdBarang;
+        // $persediaan = DB::table('barang')->where('kd_barang','like','%'.$cari.'%')->value('jumlah');
+        // // return view('supplierread')->with(['data' => $supplier]);
+        // $pembelian = $request->Jumlah;
+        // while ($persediaan >= $pembelian){
+        //     $pembelian = $pembelian - $persediaan;
+        //     $persediaan = DB::table('barang')
+        //                                     ->where('kd_barang','like','%'.$cari.'%')
+        //                                     ->first();
+        //                                     // ->orderBy('id')
+        //                                     // ->paginate();
+        //                                     // ->value('jumlah');
+        //     DB::table('barang')->where('id','like','%'.$cari.'%')->delete();
+        // }
     }
 
     /**
@@ -80,7 +95,11 @@ class penjualanController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        //        
+        $data = $request->UpdateStok;
+        $affected = DB::table('barang')
+        ->where('id', $id)
+        ->update(['jumlah' => $data]);
     }
 
     /**
@@ -91,6 +110,7 @@ class penjualanController extends Controller
      */
     public function destroy($id)
     {
-        //
+        //        
+        DB::table('barang')->where('id',$id)->delete();
     }
 }

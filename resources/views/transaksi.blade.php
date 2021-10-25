@@ -12,6 +12,7 @@
 <div class="main">
   <div class="konten">
   <span class="sidebutton" style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
+  <input type="text" id="id" placeholder="Cari Id"><br>
   <input type="text" id="kdBrg" placeholder="Cari Barang"><br>
   <input type="text" id="nmBarang" placeholder="Nama Barang">
   <input type="text" id="hrgBarang" placeholder="Harga">
@@ -53,14 +54,17 @@
                 });
         }
         const detail = (id) => {
+        var CariId =$("#id" + id).val(); 
         var CariBarang =$("#kdbrg" + id).val();  
         var CariBarang2 =$("#nmbrg" + id).val();
         var CariHarga =$("#jualbrg" + id).val();
         var CariJumlah =$("#jmlbrg" + id).val();
+        document.getElementById("id").value = CariId;
         document.getElementById("kdBrg").value = CariBarang;
         document.getElementById("nmBarang").value = CariBarang2;
         document.getElementById("hrgBarang").value = CariHarga;
         document.getElementById("persediaan").value = CariJumlah;
+        $("#jmlBeli").focus();
         };
         
         function jumlah() {
@@ -68,14 +72,17 @@
           var Kaliin2 = document.getElementById("hrgBarang").value;
           document.getElementById("Total").value = Kaliin * Kaliin2 ;
           store();
-          nota();
+          nota();          
+          
          } 
 
         
           function store() {
+            var Id = $("#id").val();
             var KdBarang = $("#kdBrg").val();
             var NmBarang = $("#nmBarang").val();
-            var Jumlah = $("#jmlBeli").val();
+            var stok = parseInt($("#persediaan").val());
+            var Jumlah = parseInt($("#jmlBeli").val());
             var HargaJual = $("#hrgBarang").val();
             var Total = $("#Total").val();
 
@@ -84,19 +91,75 @@
               type: "get",
               url: "{{ url('/penjualan/store')}}",
               data: {
+                Id,
                 KdBarang,
                 NmBarang,
                 Jumlah,
                 HargaJual,
                 Total
                 },
-              success: function(data){
+              success: function(data){                                  
                 console.log("sukses");
+                (stok >= Jumlah) ? updateStok(Id) : deleteStok(Id);
                 nota();
               },
               error: function(data) {console.log("error", status.responseText)}
             });
           }
+          
+          updateStok = (id) => {            
+            var stok = $("#persediaan").val();
+            var Jumlah = $("#jmlBeli").val();
+            var UpdateStok = stok - Jumlah;
+            $.ajax({
+              type : "get",
+              url  : "{{ url('penjualan/update')}}/" + id,
+              data: {UpdateStok},
+              success:function(data){
+                console.log("sukses");
+                (stok == 0) ? deleteStok(id) : "" ;
+                read();
+              },
+              error:function(data){
+                console.log("error", status.responseText);
+              }
+            });
+          }
+
+          deleteStok = (id) => {
+            
+            $.ajax({
+              type : "get",
+              url  : "{{ url('supplier/destroy')}}/" + id,
+              data: {},
+              success:function(data){
+                console.log("sukses");
+                read();
+              },
+              error:function(data){
+                console.log("error", status.responseText);
+              }
+            });
+          }
+          var input2 = document.getElementById("jmlBeli");
+          input2.addEventListener("keyup", function(event) {
+            if (event.keyCode === 13) {
+            event.preventDefault();
+            $("#kdBrg").focus();
+            }
+          });
+
+          var input = document.getElementById("kdBrg");
+          input.addEventListener("keyup", function(event) {
+            if (event.keyCode === 13) {
+            event.preventDefault();
+              $("#jmlBeli").focus();
+            }
+          });
+
+          // function setFocusToTextBox(){
+          //     $("#mytext").focus();
+          // }
 
 </script>
 </body>

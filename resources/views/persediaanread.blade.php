@@ -9,6 +9,7 @@
     </tr>
     @foreach ($data as $item)
     <tr>
+        <td><input type="text" id="id{{$item->id}}" value="{{ $item->id}}" hidden></td>
         <td >{{ $item->kd_barang }}<input type="text" id="kdbrg{{$item->id}}" value="{{ $item->kd_barang}}" hidden> </td>
         <td >{{ $item->nm_barang }}<input type="text" id="nmbrg{{$item->kd_barang}}" value="{{ $item->nm_barang}}" hidden></td>
         <td >{{ $item->totalStok }}<input type="text" id="jmlbrg{{$item->id}}" value="{{ $item->totalStok}}" hidden></td>

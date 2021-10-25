@@ -57,7 +57,9 @@ Route::get('/supplier/destroy/{id}',[SupplierController::class,'destroy']);
 
 Route::get('/penjualan/read',[penjualanController::class,'read']);
 Route::get('/penjualan/read/{id}',[penjualanController::class,'show']);
+Route::get('/penjualan/update/{id}',[penjualanController::class,'update']);
 Route::get('/penjualan/store',[penjualanController::class,'store']);
+Route::get('/supplier/destroy/{id}',[penjualanController::class,'destroy']);
 
 
 
