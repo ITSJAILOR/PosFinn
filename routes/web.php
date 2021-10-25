@@ -7,6 +7,7 @@ use App\Http\Controllers\TransaksiController;
 use App\Http\Controllers\PembukuanController;
 use App\Http\Controllers\PembelianControllerr;
 use App\Http\Controllers\SupplierController;
+use App\Http\Controllers\penjualanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -53,6 +54,10 @@ Route::get('/supplier/edit/{id}',[SupplierController::class,'edit']);
 Route::get('/supplier/update/{id}',[SupplierController::class,'update']);
 Route::get('/supplier/destroy/{id}',[SupplierController::class,'destroy']);
 
+
+Route::get('/penjualan/read',[penjualanController::class,'read']);
+Route::get('/penjualan/read/{id}',[penjualanController::class,'show']);
+Route::get('/penjualan/store',[penjualanController::class,'store']);
 
 
 
