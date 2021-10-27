@@ -81,7 +81,7 @@
             var Id = $("#id").val();
             var KdBarang = $("#kdBrg").val();
             var NmBarang = $("#nmBarang").val();
-            var stok = parseInt($("#persediaan").val());
+            var totalStok = parseInt($("#persediaan").val());
             var Jumlah = parseInt($("#jmlBeli").val());
             var HargaJual = $("#hrgBarang").val();
             var Total = $("#Total").val();
@@ -100,7 +100,9 @@
                 },
               success: function(data){                                  
                 console.log("sukses");
-                (stok >= Jumlah) ? updateStok(Id) : deleteStok(Id);
+                (totalStok >= Jumlah) 
+                ? updateStok(Id) 
+                : deleteStok(Id);
                 nota();
               },
               error: function(data) {console.log("error", status.responseText)}
@@ -108,7 +110,7 @@
           }
           
           updateStok = (id) => {            
-            var stok = $("#persediaan").val();
+            var totalStok = $("#persediaan").val();
             var Jumlah = $("#jmlBeli").val();
             var UpdateStok = stok - Jumlah;
             $.ajax({
@@ -117,7 +119,7 @@
               data: {UpdateStok},
               success:function(data){
                 console.log("sukses");
-                (stok == 0) ? deleteStok(id) : "" ;
+                (totalStok == 0) ? deleteStok(id) : "" ;
                 read();
               },
               error:function(data){
@@ -126,8 +128,7 @@
             });
           }
 
-          deleteStok = (id) => {
-            
+          deleteStok = (id) => {            
             $.ajax({
               type : "get",
               url  : "{{ url('supplier/destroy')}}/" + id,
