@@ -46,22 +46,9 @@ class penjualanController extends Controller
         $data['stok'] = $request->Jumlah;
         $data['harga_jual'] = $request->HargaJual;
         $data['total'] = $request->Total;
-        // DB::table('penjualan')->insert($data);
+        DB::table('penjualan')->insert($data);
         
-        // $cari = $request->KdBarang;
-        // $persediaan = DB::table('barang')->where('kd_barang','like','%'.$cari.'%')->value('jumlah');
-        // // return view('supplierread')->with(['data' => $supplier]);
-        // $pembelian = $request->Jumlah;
-        // while ($persediaan >= $pembelian){
-        //     $pembelian = $pembelian - $persediaan;
-        //     $persediaan = DB::table('barang')
-        //                                     ->where('kd_barang','like','%'.$cari.'%')
-        //                                     ->first();
-        //                                     // ->orderBy('id')
-        //                                     // ->paginate();
-        //                                     // ->value('jumlah');
-        //     DB::table('barang')->where('id','like','%'.$cari.'%')->delete();
-        // }
+        
     }
 
     /**
@@ -93,13 +80,19 @@ class penjualanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $noFaktur)
     {
         //        
-        $data = $request->UpdateStok;
-        $affected = DB::table('barang')
-        ->where('id', $id)
-        ->update(['jumlah' => $data]);
+        $dataBarang = $request->kodeBarang;
+        $data = $request->Jumlah;
+        for ($i = 0; $i < $data; $i++){
+        $persediaan = DB::table('barang')->where('kd_barang',$dataBarang)->value('jumlah');
+            $affected = DB::table('barang')
+        ->where('kd_barang', $dataBarang)
+        ->take(1)
+        ->update(['jumlah' => $persediaan - 1]);
+        $deleteKosong = DB::table('barang')->where('jumlah', 0)->delete();
+        };
     }
 
     /**
@@ -108,9 +101,9 @@ class penjualanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($noFaktur)
     {
         //        
-        DB::table('barang')->where('id',$id)->delete();
+        DB::table('penjualan')->where('no_faktur',$noFaktur)->delete();
     }
 }

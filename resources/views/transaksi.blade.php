@@ -16,6 +16,7 @@
   <input type="text" id="kdBrg" placeholder="Cari Barang"><br>
   <input type="text" id="nmBarang" placeholder="Nama Barang">
   <input type="text" id="hrgBarang" placeholder="Harga">
+  <input type="text" id="jml" placeholder="Jumlah">
   <input type="text" id="persediaan" placeholder="persediaan">
   <input type="text" id="jmlBeli" placeholder="Jumlah" onchange="jumlah()">
   <input type="text" id="Total" placeholder="Total">
@@ -32,7 +33,6 @@
   <input type="text" name="" placeholder="Order Pin">
   <input type="text" name="" placeholder="Table">
   <div id="notaPenjualan"></div>
-  <button style="bottom: 5px; position: fixed; width: 300px;">Order</button>
   </div>
 </div>   
 <script> 
@@ -58,12 +58,14 @@
         var CariBarang =$("#kdbrg" + id).val();  
         var CariBarang2 =$("#nmbrg" + id).val();
         var CariHarga =$("#jualbrg" + id).val();
-        var CariJumlah =$("#jmlbrg" + id).val();
+        var CariJumlah =$("#jml" + id).val();
+        var CariTotal =$("#jmlbrg" + id).val();
         document.getElementById("id").value = CariId;
         document.getElementById("kdBrg").value = CariBarang;
         document.getElementById("nmBarang").value = CariBarang2;
         document.getElementById("hrgBarang").value = CariHarga;
-        document.getElementById("persediaan").value = CariJumlah;
+        document.getElementById("jml").value = CariJumlah;
+        document.getElementById("persediaan").value = CariTotal;
         $("#jmlBeli").focus();
         };
         
@@ -71,7 +73,6 @@
           var Kaliin = document.getElementById("jmlBeli").value;
           var Kaliin2 = document.getElementById("hrgBarang").value;
           document.getElementById("Total").value = Kaliin * Kaliin2 ;
-          store();
           nota();          
           
          } 
@@ -86,7 +87,7 @@
             var HargaJual = $("#hrgBarang").val();
             var Total = $("#Total").val();
 
-            // if hargaLama == HargaBeli {update jumlah barang} else {tambah barang}
+            if (totalStok < Jumlah) {alert("Persediaan tidak mencukupi") } else {
             $.ajax({
               type: "get",
               url: "{{ url('/penjualan/store')}}",
@@ -100,27 +101,29 @@
                 },
               success: function(data){                                  
                 console.log("sukses");
-                (totalStok >= Jumlah) 
-                ? updateStok(Id) 
-                : deleteStok(Id);
                 nota();
+                $("#kdBrg").focus();
               },
               error: function(data) {console.log("error", status.responseText)}
             });
+            }
           }
           
-          updateStok = (id) => {            
-            var totalStok = $("#persediaan").val();
+          updateStok = (id) => {     
+
+            var kodeBarang = $("#kodeBarang"+ id).val();
+            
+            // kodeBarang.forEach(console.log(kodeBarang));
             var Jumlah = $("#jmlBeli").val();
-            var UpdateStok = stok - Jumlah;
             $.ajax({
               type : "get",
               url  : "{{ url('penjualan/update')}}/" + id,
-              data: {UpdateStok},
+              data: {kodeBarang, Jumlah},
               success:function(data){
                 console.log("sukses");
-                (totalStok == 0) ? deleteStok(id) : "" ;
+                // (totalStok == 0) ? deleteStok(id) : "" ;
                 read();
+                document.getElementById("CancelOrder").click();
               },
               error:function(data){
                 console.log("error", status.responseText);
@@ -135,7 +138,7 @@
               data: {},
               success:function(data){
                 console.log("sukses");
-                read();
+                nota();
               },
               error:function(data){
                 console.log("error", status.responseText);
@@ -146,7 +149,7 @@
           input2.addEventListener("keyup", function(event) {
             if (event.keyCode === 13) {
             event.preventDefault();
-            $("#kdBrg").focus();
+            store();
             }
           });
 

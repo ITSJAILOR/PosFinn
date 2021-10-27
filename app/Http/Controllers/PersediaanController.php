@@ -23,6 +23,7 @@ class PersediaanController extends Controller
         // return view('persediaanread')->with(['data' => $data]);
         $data = DB::table('barang')
                             ->select('*' , DB::raw('SUM(jumlah) AS totalStok'))
+                            ->orderByDesc('Id')
                             ->groupBy('kd_barang')
                             ->get();
         return view('persediaanread')->with(['data' => $data]);
@@ -34,7 +35,7 @@ class PersediaanController extends Controller
         $data = DB::table('barang')
                             ->select('*' , DB::raw('SUM(jumlah) AS totalStok'))
                             ->groupBy('kd_barang')
-                            ->where('kd_barang','like','%'.$cari.'%')->paginate();
+                            ->where('kd_barang','like',$cari)->paginate();
 
         return view('persediaanread')->with(['data' => $data]);
     }

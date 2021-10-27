@@ -3,7 +3,7 @@
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="style.css">
-    <script src="jquery-1.10.2.js"></script>
+    <script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
     <!--Script animation side bar-->
     <script src="SideScript.js"></script></head>
     <body>

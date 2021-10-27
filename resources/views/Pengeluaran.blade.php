@@ -134,15 +134,15 @@
   };
 
   const  cariBarang = () => {
-    let KdBarang = $("#KdBarang").val(); 
+    let CariData = $("#KdBarang").val(); 
     
     $.get("{{url('/barang/read')}}", function (data, status){$("#caribarang").html(data);});
     $.ajax({
       type : "get",
       url  : "{{ url('barang/cari')}}",
-      data: {KdBarang},
+      data: {CariData},
       success:function(data){
-        let CariData2 =$("#nmbrg" + KdBarang).val();
+        let CariData2 =$("#nmbrg" + CariData).val();
         // let CariHarga =$("#hrgLama" + KdBarang).val(); 
         document.getElementById("NmBarang").value = CariData2;
       },
